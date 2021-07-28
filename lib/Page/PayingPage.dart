@@ -10,6 +10,16 @@ class PayingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Controller c = Get.put(Controller());
     return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            c.reset();
+            Get.back();
+          },
+        ),
+        centerTitle: true,
+        title: Text('계산'),
+      ),
       body: SafeArea(
         child: Center(
           child: Column(

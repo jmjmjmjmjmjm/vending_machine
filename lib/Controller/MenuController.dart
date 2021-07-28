@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vending_machine/Page/MenuPage.dart';
 import 'package:vending_machine/Page/StartPage.dart';
@@ -64,12 +65,13 @@ class Controller extends GetxController {
   card() {
     print("int2 실행");
     _timer = Timer(Duration(seconds: 5), () {
-      int my = (Random().nextInt(1000) + 1) * 10;
+      int my = (Random().nextInt(2000) + 1) * 10;
       m.value = my.toInt();
-      if (m.value > priceInt.value) {
+      if (m.value <= priceInt.value) {
         state.value = "결제되었습니다";
         timeToSucess();
       } else {
+        m.value = 0;
         state.value = "잔액부족";
       }
     });
@@ -77,8 +79,10 @@ class Controller extends GetxController {
 
   timeToSucess() {
     Timer(Duration(seconds: 5), () {
-      Get.offAll(SucessPage());
-      timeToMain();
+      if (priceInt <= m.value) {
+        Get.offAll(SucessPage());
+        timeToMain();
+      }
     });
   }
 
@@ -87,10 +91,16 @@ class Controller extends GetxController {
   }
 
   timeToMain() {
-    Timer(Duration(seconds: 8), () {
+    Timer(Duration(seconds: 6), () {
       m.value = 0;
       state.value = "";
-      Get.offAll(StartPage());
+      Get.offAll(MenuPage());
     });
+  }
+
+  reset() {
+    _timer.cancel();
+    m.value = 0;
+    state.value = "";
   }
 }

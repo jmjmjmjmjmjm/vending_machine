@@ -11,20 +11,31 @@ class PlaBtn extends GetWidget<Controller> {
 
   @override
   Widget build(BuildContext context) {
-    var color = Colors.grey;
-    return Container(
-      color: color,
-      width: Get.width,
-      height: Get.height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(menu.name),
-          SizedBox(
-            height: 5,
+    Controller c = Get.put(Controller());
+    return Scaffold(
+      body: Obx(
+        () => Container(
+          // color: c.color.value,
+          width: Get.width,
+          height: Get.height,
+          child: MaterialButton(
+            onPressed: () {
+              menu.check = !menu.check;
+              // c.updateItem(menu);
+              c.menuSelect(menu.name, menu.price);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(menu.name),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(menu.price.toString() + " 원")
+              ],
+            ),
           ),
-          Text(menu.price.toString() + " 원")
-        ],
+        ),
       ),
     );
   }

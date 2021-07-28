@@ -11,6 +11,10 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Controller c = Get.put(Controller());
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('계산금액'),
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(

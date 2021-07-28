@@ -12,32 +12,33 @@ class MenuBtn extends StatelessWidget {
     return buildChoiceChip();
   }
 
-  ChoiceChip buildChoiceChip() {
+  Widget buildChoiceChip() {
     Controller c = Get.put(Controller());
 
     print("Come Re Draw");
-    return ChoiceChip(
-      label: Container(
-        width: Get.width,
-        height: Get.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(menu.name),
-            SizedBox(
-              height: 5,
-            ),
-            Text(menu.price.toString() + " 원")
-          ],
+    return Scaffold(
+      body: ChoiceChip(
+        label: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(menu.name),
+              SizedBox(
+                height: 5,
+              ),
+              Text(menu.price.toString() + " 원")
+            ],
+          ),
         ),
+        selected: menu.check,
+        onSelected: (select) {
+          menu.check = select;
+          c.updateItem(menu);
+          c.menuSelect(menu.name, menu.price);
+        },
       ),
-      selected: menu.check,
-      onSelected: (select) {
-        menu.check = select;
-        c.updateItem(menu);
-        c.menuSelect(menu.name, menu.price);
-        print(menu.check);
-      },
     );
   }
 }
