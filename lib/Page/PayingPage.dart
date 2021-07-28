@@ -16,6 +16,7 @@ class PayingPage extends StatelessWidget {
             c.reset();
             Get.back();
           },
+          child: Icon(Icons.arrow_back),
         ),
         centerTitle: true,
         title: Text('계산'),

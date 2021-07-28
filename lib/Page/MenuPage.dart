@@ -22,6 +22,10 @@ class MenuPage extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('메뉴선택'),
+        ),
         body: SafeArea(
           child: Column(
             children: [
